@@ -1,0 +1,12 @@
+# Temporary Files
+*~
+
+# Binary files
+build
+*.o
+
+# Code::Blocks files
+*.cbp
+*.project
+*.layout
+*.depend
