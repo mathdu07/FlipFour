@@ -8,8 +8,8 @@
  *
  *  Flip Four is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. *  See the
- *  GNU General Public License for more details.
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *  See the GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
  *  along with Flip Four. If not, see <http://www.gnu.org/licenses/>.
@@ -24,7 +24,7 @@ class AboutState : public State
 {
 public:
     AboutState(Game &game);
-    
+
     virtual void init();
 
     virtual void handleEvent(sf::Event const &event);
@@ -34,7 +34,7 @@ public:
     virtual void render(sf::RenderTarget &target);
 
     virtual void update();
-    
+
 private:
     sf::RectangleShape m_background;
     sf::ui::Label m_title;

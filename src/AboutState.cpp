@@ -8,8 +8,8 @@
  *
  *  Flip Four is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. *  See the
- *  GNU General Public License for more details.
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *  See the GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
  *  along with Flip Four. If not, see <http://www.gnu.org/licenses/>.
@@ -26,46 +26,46 @@ AboutState::AboutState(Game &game)
     m_title.setText("About");
     m_developer.setText("Developed by Mathieu Margier");
     m_license.setText("Distributed under GPLv3 license");
-    
+
     std::ostringstream version;
     version << "Version : ";
     version << FLIP_FOUR_VERSION_MAJOR << ".";
     version << FLIP_FOUR_VERSION_MINOR << ".";
     version << FLIP_FOUR_VERSION_PATCH;
-    
+
     m_version.setText(version.str());
-    
+
     m_back.setText("<- Back");
-    
+
     m_background.setFillColor(sf::Color::Red);
 }
 
 void AboutState::init()
 {
     m_background.setSize(sf::Vector2f(m_game.getSize().x, m_game.getSize().y));
-    
+
     Fonts const &f = m_game.fonts();
     m_title.setFont(f.getBold());
     m_title.setFontSize(45);
     m_title.setFontColor(sf::Color::White);
     m_title.setPosition(m_game.getSize().x / 2 - 80, 50);
-    
+
     m_developer.setFont(f.getContent());
     m_developer.setFontSize(25);
     m_developer.setFontColor(sf::Color::White);
     m_developer.setPosition(20, 300);
-    
+
     m_license.setFont(f.getContent());
     m_license.setFontSize(25);
     m_license.setFontColor(sf::Color::White);
     m_license.setPosition(20, 350);
-    
+
     m_version.setFont(f.getContent());
     m_version.setFontSize(25);
     m_version.setFontColor(sf::Color::White);
     m_version.setPosition(20, 400);
-    
-    Graphics const &g = m_game.gfx(); 
+
+    Graphics const &g = m_game.gfx();
     m_back.setTexture(g.getButton());
     m_back.setTextureFocused(g.getButton());
     m_back.setTextureFired(g.getButtonFired());
