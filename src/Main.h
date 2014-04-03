@@ -24,8 +24,8 @@
 #include <SFML/System.hpp>
 #include <iostream>
 
-#define FOUR_FLIP_VERSION_MAJOR 0
-#define FOUR_FLIP_VERSION_MINOR 0
-#define FOUR_FLIP_VERSION_PATCH 1
+#define FLIP_FOUR_VERSION_MAJOR 0
+#define FLIP_FOUR_VERSION_MINOR 0
+#define FLIP_FOUR_VERSION_PATCH 1
 
 #endif

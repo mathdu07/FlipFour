@@ -40,6 +40,9 @@ public:
     State& getState();
 
     sf::Vector2u getSize() const;
+    
+    void switchToMainMenu();
+    void switchToAbout();
 
     void exit();
 

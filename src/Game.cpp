@@ -17,6 +17,7 @@
  #include "Game.h"
  #include "State.h"
  #include "MainMenuState.h"
+ #include "AboutState.h"
 
 Game::Game(sf::RenderWindow &window)
 : m_window(window), m_assets(), m_oldState(0), m_state(0)
@@ -136,4 +137,14 @@ State& Game::getState()
 sf::Vector2u Game::getSize() const
 {
     return m_window.getSize();
+}
+
+void Game::switchToMainMenu()
+{
+    setState(new MainMenuState(*this));
+}
+
+void Game::switchToAbout()
+{
+    setState(new AboutState(*this));
 }

@@ -15,20 +15,33 @@
  *  along with Flip Four. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "Main.h"
-#include <cstdlib>
-#include "Game.h"
+#ifndef ABOUT_STATE_H
+#define ABOUT_STATE_H
 
-int main(int argc, char *argv[])
+#include "State.h"
+
+class AboutState : public State
 {
-    std::cout << "Starting Flip Four v" << FLIP_FOUR_VERSION_MAJOR;
-    std::cout << "." << FLIP_FOUR_VERSION_MINOR;
-    std::cout << "." << FLIP_FOUR_VERSION_PATCH << std::endl;
+public:
+    AboutState(Game &game);
+    
+    virtual void init();
 
-    sf::RenderWindow window;
-    Game game(window);
+    virtual void handleEvent(sf::Event const &event);
 
-    game.run();
+    virtual void deInit();
 
-    return EXIT_SUCCESS;
-}
+    virtual void render(sf::RenderTarget &target);
+
+    virtual void update();
+    
+private:
+    sf::RectangleShape m_background;
+    sf::ui::Label m_title;
+    sf::ui::Label m_developer;
+    sf::ui::Label m_license;
+    sf::ui::Label m_version;
+    sf::ui::Button m_back;
+};
+
+#endif
