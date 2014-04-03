@@ -3,7 +3,7 @@ Flip Four
 
 Goal
 ----
-    To make a game similar to Connect Four, but with a new important feature : the ability to flip the game grid.
+Make a game similar to Connect Four, but with a new important feature : the ability to flip the game grid.
     
 Gameplay
 --------
@@ -32,7 +32,7 @@ Flip :
 <code>
 // Pseudo code
 
-void flip(bool left) // Or right, to check ^^
+void flip(bool left)
 {
     Case oldMap[5][5] = clone(map);
     
