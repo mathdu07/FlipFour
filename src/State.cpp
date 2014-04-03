@@ -15,17 +15,10 @@
  *  along with Flip Four. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef MAIN_H
-#define MAIN_H
+ #include "State.h"
 
-#include <SFML/UI.hpp>
-#include <SFML/Graphics.hpp>
-#include <SFML/Window.hpp>
-#include <SFML/System.hpp>
-#include <iostream>
+ State::State(Game &game)
+ : m_game(game)
+ {
 
-#define FOUR_FLIP_VERSION_MAJOR 0
-#define FOUR_FLIP_VERSION_MINOR 0
-#define FOUR_FLIP_VERSION_PATCH 1
-
-#endif
+ }

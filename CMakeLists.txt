@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.6)
-project(four-flip)
+project(flip-four)
 
 if (NOT CMAKE_BUILD_TYPE)
 set(CMAKE_BUILD_TYPE Release CACHE STRING "Choose the type of build, options are: None Debug Release RelWithDebInfo MinSizeRel." FORCE)
@@ -24,7 +24,7 @@ link_directories(${SFML_LIBRARY_PATH})
 link_directories(${SFML_UI_LIBRARY_PATH})
 
 set(EXECUTABLE_OUTPUT_PATH bin/${CMAKE_BUILD_TYPE})
-set(EXECUTABLE four-flip)
+set(EXECUTABLE flip-four)
 
 file(
 GLOB_RECURSE

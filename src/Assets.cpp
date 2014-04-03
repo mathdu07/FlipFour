@@ -15,17 +15,26 @@
  *  along with Flip Four. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef MAIN_H
-#define MAIN_H
+#include "Assets.h"
 
-#include <SFML/UI.hpp>
-#include <SFML/Graphics.hpp>
-#include <SFML/Window.hpp>
-#include <SFML/System.hpp>
-#include <iostream>
+Assets::Assets()
+: m_fonts(), m_graphics()
+{
 
-#define FOUR_FLIP_VERSION_MAJOR 0
-#define FOUR_FLIP_VERSION_MINOR 0
-#define FOUR_FLIP_VERSION_PATCH 1
+}
 
-#endif
+void Assets::loadAssets()
+{
+    m_fonts.load();
+    m_graphics.load();
+}
+
+Fonts const& Assets::getFonts() const
+{
+    return m_fonts;
+}
+
+Graphics const& Assets::getGraphics() const
+{
+    return m_graphics;
+}

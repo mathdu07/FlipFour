@@ -1,19 +1,19 @@
-4 Flip
-=======
+Flip Four
+=========
 
-Objectif
---------
-    Il s'agit de faire un jeu similaire au puissance 4, mais avec une nouvelle fonctionnalité : pouvoir tourner la grille de jeu.
+Goal
+----
+    To make a game similar to Connect Four, but with a new important feature : the ability to flip the game grid.
     
 Gameplay
----------
-Le jeu se déroule sur grille de 5*5 cases (voir +), avec la possibilité de :
+--------
+The game takes place in a 5*5 grid (or plus), with the abilities :
 
-* poser une croix (joueur 1)
-* poser un rond (joueur 2)
-* faire tourner la grille vers la droite ou vers la gauche
+* put a cross (player 1)
+* put a circle (player 2)
+* flip left or right the grid
 
-Fonctions
+Functions
 ---------
 
 Map :

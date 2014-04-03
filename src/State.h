@@ -15,17 +15,29 @@
  *  along with Flip Four. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef MAIN_H
-#define MAIN_H
+#ifndef STATE_H
+#define STATE_H
 
-#include <SFML/UI.hpp>
-#include <SFML/Graphics.hpp>
-#include <SFML/Window.hpp>
-#include <SFML/System.hpp>
-#include <iostream>
+#include "Main.h"
+#include "Game.h"
 
-#define FOUR_FLIP_VERSION_MAJOR 0
-#define FOUR_FLIP_VERSION_MINOR 0
-#define FOUR_FLIP_VERSION_PATCH 1
+class State
+{
+public:
+    State(Game &game);
+
+    virtual void init() = 0;
+
+    virtual void handleEvent(sf::Event const &event) = 0;
+
+    virtual void deInit() = 0;
+
+    virtual void render(sf::RenderTarget &target) = 0;
+
+    virtual void update() = 0;
+
+protected:
+    Game &m_game;
+};
 
 #endif

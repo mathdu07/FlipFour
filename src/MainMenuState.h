@@ -15,17 +15,30 @@
  *  along with Flip Four. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef MAIN_H
-#define MAIN_H
+#ifndef MAIN_MENU_STATE_H
+#define MAIN_MENU_STATE_H
 
-#include <SFML/UI.hpp>
-#include <SFML/Graphics.hpp>
-#include <SFML/Window.hpp>
-#include <SFML/System.hpp>
-#include <iostream>
+#include "State.h"
 
-#define FOUR_FLIP_VERSION_MAJOR 0
-#define FOUR_FLIP_VERSION_MINOR 0
-#define FOUR_FLIP_VERSION_PATCH 1
+class MainMenuState : public State
+{
+public:
+    MainMenuState(Game &game);
 
-#endif
+    virtual void init();
+
+    virtual void handleEvent(sf::Event const &event);
+
+    virtual void deInit();
+
+    virtual void render(sf::RenderTarget &target);
+
+    virtual void update();
+
+private:
+    sf::RectangleShape m_background;
+    sf::ui::Label m_title;
+    sf::ui::Button m_singleplayerButton, m_multiplayerButton, m_aboutButton, m_exitButton;
+};
+
+ #endif

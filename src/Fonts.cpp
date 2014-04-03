@@ -15,17 +15,32 @@
  *  along with Flip Four. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef MAIN_H
-#define MAIN_H
+#include "Fonts.h"
 
-#include <SFML/UI.hpp>
-#include <SFML/Graphics.hpp>
-#include <SFML/Window.hpp>
-#include <SFML/System.hpp>
-#include <iostream>
+Fonts::Fonts()
+: m_content(), m_bold(), m_oblique()
+{
 
-#define FOUR_FLIP_VERSION_MAJOR 0
-#define FOUR_FLIP_VERSION_MINOR 0
-#define FOUR_FLIP_VERSION_PATCH 1
+}
 
-#endif
+void Fonts::load()
+{
+    m_content.loadFromFile("res/fonts/purisa.ttf");
+    m_bold.loadFromFile("res/fonts/purisa-bold.ttf");
+    m_oblique.loadFromFile("res/fonts/purisa-oblique.ttf");
+}
+
+sf::Font const& Fonts::getContent() const
+{
+    return m_content;
+}
+
+sf::Font const& Fonts::getBold() const
+{
+    return m_bold;
+}
+
+sf::Font const& Fonts::getOblique() const
+{
+    return m_oblique;
+}

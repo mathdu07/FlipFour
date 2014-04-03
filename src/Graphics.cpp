@@ -15,17 +15,26 @@
  *  along with Flip Four. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef MAIN_H
-#define MAIN_H
+#include "Graphics.h"
 
-#include <SFML/UI.hpp>
-#include <SFML/Graphics.hpp>
-#include <SFML/Window.hpp>
-#include <SFML/System.hpp>
-#include <iostream>
+Graphics::Graphics()
+: m_button(), m_buttonFired()
+{
 
-#define FOUR_FLIP_VERSION_MAJOR 0
-#define FOUR_FLIP_VERSION_MINOR 0
-#define FOUR_FLIP_VERSION_PATCH 1
+}
 
-#endif
+void Graphics::load()
+{
+    m_button.loadFromFile("res/gfx/button.png");
+    m_buttonFired.loadFromFile("res/gfx/button_fired.png");
+}
+
+sf::Texture const& Graphics::getButton() const
+{
+    return m_button;
+}
+
+sf::Texture const& Graphics::getButtonFired() const
+{
+    return m_buttonFired;
+}
