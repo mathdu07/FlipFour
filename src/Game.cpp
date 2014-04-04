@@ -18,6 +18,7 @@
  #include "State.h"
  #include "MainMenuState.h"
  #include "AboutState.h"
+ #include "PlayState.h"
 
 Game::Game(sf::RenderWindow &window)
 : m_window(window), m_assets(), m_oldState(0), m_state(0)
@@ -147,4 +148,9 @@ void Game::switchToMainMenu()
 void Game::switchToAbout()
 {
     setState(new AboutState(*this));
+}
+
+void Game::playMultiplayer()
+{
+    setState(new PlayState(*this, true));
 }

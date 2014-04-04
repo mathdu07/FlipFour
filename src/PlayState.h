@@ -15,35 +15,42 @@
  *  along with Flip Four. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef GRAPHICS_H
-#define GRAPHICS_H
+#ifndef PLAY_STATE_H
+#define PLAY_STATE_H
 
-#include "Main.h"
+#include "State.h"
+#include "Grid.h"
 
-class Graphics
+class PlayState : public State
 {
 public:
-    Graphics();
-
-    void load();
-
-    sf::Texture const& getButton() const;
-    sf::Texture const& getButtonFired() const;
+    PlayState(Game &game, bool multi);
     
-    sf::Texture const& getGrid() const;
-    sf::Texture const& getCase() const;
-    
-    sf::Texture const& getPlayer1() const;
-    sf::Texture const& getPlayer2() const;
-    
-    sf::Texture const& getArrowLeft() const;
-    sf::Texture const& getArrowRight() const;
+    virtual void init();
 
+    virtual void handleEvent(sf::Event const &event);
+
+    virtual void deInit();
+
+    virtual void render(sf::RenderTarget &target);
+
+    virtual void update();
+    
+    Case getTurn() const;
+    
 private:
-    sf::Texture m_button, m_buttonFired;
-    sf::Texture m_grid, m_case;
-    sf::Texture m_player1, m_player2;
-    sf::Texture m_arrowLeft, m_arrowRight;
+    void setTurn(Case c);
+    
+private:
+    bool m_multiplayer; // True -> Multiplayer, False -> Singleplayer VS AI
+    sf::RectangleShape m_background;
+    sf::ui::Label m_title, m_subTitle;
+    sf::ui::Button m_leave;
+    Grid m_grid;
+    Case m_turn;
+    sf::Sprite m_gridSprite;
+    sf::ui::Label m_player1, m_player2;
+    sf::ui::Button m_arrowLeft, m_arrowRight;
 };
 
 #endif

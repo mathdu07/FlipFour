@@ -39,7 +39,9 @@ private:
     sf::RectangleShape m_background;
     sf::ui::Label m_title;
     sf::ui::Label m_developer;
+    sf::ui::Label m_idea;
     sf::ui::Label m_license;
+    sf::ui::Label m_libs;
     sf::ui::Label m_version;
     sf::ui::Button m_back;
 };

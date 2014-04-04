@@ -20,12 +20,15 @@
 
 AboutState::AboutState(Game &game)
 : State(game), m_background(),
-  m_title(), m_developer(), m_license(), m_version(),
+  m_title(), m_developer(), m_idea(), m_license(),
+  m_libs(), m_version(),
   m_back(&game, &Game::switchToMainMenu)
 {
     m_title.setText("About");
     m_developer.setText("Developed by Mathieu Margier");
+    m_idea.setText("Based on a idea of :\n * Debugnes Charles\n * Elissade Rafael");
     m_license.setText("Distributed under GPLv3 license");
+    m_libs.setText("Libraries : SFML & SFML-UI");
 
     std::ostringstream version;
     version << "Version : ";
@@ -53,17 +56,27 @@ void AboutState::init()
     m_developer.setFont(f.getContent());
     m_developer.setFontSize(25);
     m_developer.setFontColor(sf::Color::White);
-    m_developer.setPosition(20, 300);
+    m_developer.setPosition(20, 200);
+    
+    m_idea.setFont(f.getContent());
+    m_idea.setFontSize(25);
+    m_idea.setFontColor(sf::Color::White);
+    m_idea.setPosition(20, 250);
 
     m_license.setFont(f.getContent());
     m_license.setFontSize(25);
     m_license.setFontColor(sf::Color::White);
-    m_license.setPosition(20, 350);
+    m_license.setPosition(20, 400);
+    
+    m_libs.setFont(f.getContent());
+    m_libs.setFontSize(25);
+    m_libs.setFontColor(sf::Color::White);
+    m_libs.setPosition(20, 450);
 
     m_version.setFont(f.getContent());
     m_version.setFontSize(25);
     m_version.setFontColor(sf::Color::White);
-    m_version.setPosition(20, 400);
+    m_version.setPosition(20, 500);
 
     Graphics const &g = m_game.gfx();
     m_back.setTexture(g.getButton());
@@ -79,7 +92,9 @@ void AboutState::handleEvent(sf::Event const &event)
 {
     m_title.updateEvent(event);
     m_developer.updateEvent(event);
+    m_idea.updateEvent(event);
     m_license.updateEvent(event);
+    m_libs.updateEvent(event);
     m_version.updateEvent(event);
     m_back.updateEvent(event);
 }
@@ -94,7 +109,9 @@ void AboutState::render(sf::RenderTarget &target)
     target.draw(m_background);
     target.draw(m_title);
     target.draw(m_developer);
+    target.draw(m_idea);
     target.draw(m_license);
+    target.draw(m_libs);
     target.draw(m_version);
     target.draw(m_back);
 }

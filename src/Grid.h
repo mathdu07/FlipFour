@@ -8,42 +8,52 @@
  *
  *  Flip Four is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
  *  See the GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
  *  along with Flip Four. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef GRAPHICS_H
-#define GRAPHICS_H
+#ifndef GRID_H
+#define GRID_H
+
+#define GRID_SIZE 5
+
+enum Case
+{
+    NONE,
+    PLAYER_1,
+    PLAYER_2
+};
+
+//Forward Class
+class PlayState;
 
 #include "Main.h"
 
-class Graphics
+class Grid
 {
 public:
-    Graphics();
-
-    void load();
-
-    sf::Texture const& getButton() const;
-    sf::Texture const& getButtonFired() const;
+    Grid(PlayState &state);
     
-    sf::Texture const& getGrid() const;
-    sf::Texture const& getCase() const;
+    void init();
     
-    sf::Texture const& getPlayer1() const;
-    sf::Texture const& getPlayer2() const;
+    Case getCaseAt(sf::Uint32 x, sf::Uint32 y) const;
     
-    sf::Texture const& getArrowLeft() const;
-    sf::Texture const& getArrowRight() const;
+    void setCaseAt(sf::Uint32 x, sf::Uint32 y, Case c);
+    
+    void render();
+    
+    const sf::Texture& getGridTexture() const;
 
 private:
-    sf::Texture m_button, m_buttonFired;
-    sf::Texture m_grid, m_case;
-    sf::Texture m_player1, m_player2;
-    sf::Texture m_arrowLeft, m_arrowRight;
+    PlayState &m_state;
+    Case m_map[GRID_SIZE][GRID_SIZE];
+    sf::RenderTexture m_target;
+    sf::Sprite m_background;
+    sf::Sprite m_gridShape;
+    sf::Sprite m_case1, m_case2;
 };
 
 #endif

@@ -22,3 +22,8 @@
  {
 
  }
+ 
+ Game& State::getGame()
+ {
+    return m_game;
+ }

@@ -43,6 +43,7 @@ public:
 
     void switchToMainMenu();
     void switchToAbout();
+    void playMultiplayer();
 
     void exit();
 

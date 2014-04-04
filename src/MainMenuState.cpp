@@ -19,7 +19,7 @@
 
 MainMenuState::MainMenuState(Game &game)
 : State(game), m_background(), m_title(),
-  m_singleplayerButton(), m_multiplayerButton(),
+  m_singleplayerButton(), m_multiplayerButton(&game, &Game::playMultiplayer),
   m_aboutButton(&game, &Game::switchToAbout), m_exitButton(&game, &Game::exit)
 {
     m_singleplayerButton.setText("Single Player");

@@ -18,7 +18,10 @@
 #include "Graphics.h"
 
 Graphics::Graphics()
-: m_button(), m_buttonFired()
+: m_button(), m_buttonFired(),
+  m_grid(), m_case(),
+  m_player1(), m_player2(),
+  m_arrowLeft(), m_arrowRight()
 {
 
 }
@@ -27,6 +30,16 @@ void Graphics::load()
 {
     m_button.loadFromFile("res/gfx/button.png");
     m_buttonFired.loadFromFile("res/gfx/button_fired.png");
+    
+    m_grid.loadFromFile("res/gfx/grid.png");
+    m_case.loadFromFile("res/gfx/case.png");
+    m_case.setRepeated(true);
+    
+    m_player1.loadFromFile("res/gfx/player_1.png");
+    m_player2.loadFromFile("res/gfx/player_2.png");
+    
+    m_arrowLeft.loadFromFile("res/gfx/arrow_left.png");
+    m_arrowRight.loadFromFile("res/gfx/arrow_right.png");
 }
 
 sf::Texture const& Graphics::getButton() const
@@ -37,4 +50,34 @@ sf::Texture const& Graphics::getButton() const
 sf::Texture const& Graphics::getButtonFired() const
 {
     return m_buttonFired;
+}
+
+sf::Texture const& Graphics::getGrid() const
+{
+    return m_grid;
+}
+
+sf::Texture const& Graphics::getCase() const
+{
+    return m_case;
+}
+    
+sf::Texture const& Graphics::getPlayer1() const
+{
+    return m_player1;
+}
+
+sf::Texture const& Graphics::getPlayer2() const
+{
+    return m_player2;
+}
+
+sf::Texture const& Graphics::getArrowLeft() const
+{
+    return m_arrowLeft;
+}
+
+sf::Texture const& Graphics::getArrowRight() const
+{
+    return m_arrowRight;
 }

@@ -35,6 +35,8 @@ public:
     virtual void render(sf::RenderTarget &target) = 0;
 
     virtual void update() = 0;
+    
+    Game& getGame();
 
 protected:
     Game &m_game;
