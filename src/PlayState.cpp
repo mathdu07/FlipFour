@@ -16,13 +16,15 @@
  */
 
 #include "PlayState.h"
+#include <cmath>
 
 PlayState::PlayState(Game &game, bool multi)
 : State(game), m_multiplayer(multi),
   m_background(), m_title(), m_subTitle(),
   m_leave(&game, &Game::switchToMainMenu), 
   m_grid(*this), m_turn(NONE), m_gridSprite(),
-  m_player1(), m_player2(), m_arrowLeft(), m_arrowRight()
+  m_player1(), m_player2(), m_arrowLeft(), m_arrowRight(),
+  m_lineWin()
 {
     m_title.setText("Flip Four");
     m_subTitle.setText("1 vs 1");
@@ -80,11 +82,87 @@ void PlayState::init()
     m_arrowRight.setTextureFocused(g.getArrowRight());
     m_arrowRight.setTextureFired(g.getArrowRight());
     m_arrowRight.setPosition(m_gridSprite.getPosition() + m_gridSprite.getOrigin());
+    
+    m_lineWin.setFillColor(g.getMainColor());
 }
 
 void PlayState::handleEvent(sf::Event const &event)
 {
+    if (m_grid.isPlaying())
+    {
+        switch (event.type)
+        {
+        case sf::Event::MouseButtonReleased:
+        {
+            sf::Event::MouseButtonEvent me = event.mouseButton;
+            
+            if (me.button == sf::Mouse::Left)
+            {
+                int x = me.x - m_gridSprite.getPosition().x + m_gridSprite.getOrigin().x;
+                int y = me.y - m_gridSprite.getPosition().y + m_gridSprite.getOrigin().y;
+                
+                if (m_grid.isInGrid(x, y))
+                {
+                    sf::Vector2i coord = m_grid.getMapCoordAt(x, y);
+                    
+                    if (m_grid.getCaseAt(coord.x, coord.y) == NONE)
+                    {
+                        m_grid.setCaseAt(coord.x, coord.y, m_turn);
+                        
+                        if (m_grid.isPlaying())
+                        {
+                            setTurn(m_turn == PLAYER_1 ? PLAYER_2 : PLAYER_1);
+                        }
+                        else if (m_grid.getWinner() != NONE)
+                        {
+                            std::cout << "Updating line" << std::endl;
+                            updateLine(m_grid.getDirectionWin());
+                            
+                            sf::Vector2f gridPos = m_gridSprite.getPosition() - m_gridSprite.getOrigin();
+                            sf::Vector2f gridSize = sf::Vector2f(m_gridSprite.getLocalBounds().width, m_gridSprite.getLocalBounds().height);
+                            std::cout << "Grid Bounds : (" << gridPos.x << ";" << gridPos.y << ")";
+                            std::cout << " with size (" << gridSize.x << ";" << gridSize.y << ")" << std::endl;
+                            sf::Vector2i coord = m_grid.getFirstCaseWin();
+                            m_lineWin.setPosition(gridPos.x + (coord.x + 0.5) * gridSize.x / GRID_SIZE,
+                            gridPos.y + (coord.y + 0.5) * gridSize.y / GRID_SIZE);
+                            //TODO Center line
+                        }
+                    }
+                }
+
+            }
+            
+            break;
+        }
+        default:
+            break;
+        }
+    }
+        
     m_leave.updateEvent(event);
+    m_arrowLeft.updateEvent(event);
+    m_arrowRight.updateEvent(event);
+}
+
+void PlayState::updateLine(Direction d)
+{
+    switch (d)
+    {
+    case HORIZONTAL:
+        m_lineWin.setSize(sf::Vector2f(3 * m_gridSprite.getLocalBounds().width / GRID_SIZE, 5));
+        m_lineWin.setRotation(0);
+        break;
+    case VERTICAL:
+        m_lineWin.setSize(sf::Vector2f(5, 3 * m_gridSprite.getLocalBounds().height / GRID_SIZE));
+        m_lineWin.setRotation(0);
+        break;
+    case LEFT_DIAGONAL:
+    case RIGHT_DIAGONAL:
+        m_lineWin.setSize(sf::Vector2f(sqrt(pow(3 * m_gridSprite.getLocalBounds().width / GRID_SIZE, 2) 
+            + pow(3 * m_gridSprite.getLocalBounds().height / GRID_SIZE, 2)), 5));
+        m_lineWin.setRotation(d == LEFT_DIAGONAL ? 45 : -45);
+        break;
+    }
 }
 
 void PlayState::deInit()
@@ -105,6 +183,18 @@ void PlayState::render(sf::RenderTarget &target)
     
     m_grid.render();
     target.draw(m_gridSprite);
+    
+    if (!m_grid.isPlaying())
+    {
+        /*std::cout << "Drawing line" << std::endl;
+        sf::FloatRect f = m_lineWin.getLocalBounds();
+        std::cout << "Line begin from (" << f.left << ";" << f.top << ")";
+        std::cout << " to (" << f.width << ";" << f.height << ")";
+        sf::Color c = m_lineWin.getFillColor();
+        std::cout << " with color (" << (sf::Uint32) c.r << ";" << (sf::Uint32) c.g << ";";
+        std::cout << (sf::Uint32) c.b << ";" << (sf::Uint32) c.a << ")" << std::endl;*/
+        target.draw(m_lineWin);
+    }
 }
 
 void PlayState::update()

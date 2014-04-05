@@ -36,10 +36,12 @@ public:
 
     virtual void update();
     
-    Case getTurn() const;
+    Case getTurn() const;    
     
 private:
     void setTurn(Case c);
+    
+    void updateLine(Direction d);
     
 private:
     bool m_multiplayer; // True -> Multiplayer, False -> Singleplayer VS AI
@@ -51,6 +53,7 @@ private:
     sf::Sprite m_gridSprite;
     sf::ui::Label m_player1, m_player2;
     sf::ui::Button m_arrowLeft, m_arrowRight;
+    sf::RectangleShape m_lineWin;
 };
 
 #endif

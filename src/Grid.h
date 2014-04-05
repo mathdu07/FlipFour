@@ -27,6 +27,14 @@ enum Case
     PLAYER_2
 };
 
+enum Direction
+{
+    HORIZONTAL,
+    VERTICAL,
+    LEFT_DIAGONAL,
+    RIGHT_DIAGONAL
+};
+
 //Forward Class
 class PlayState;
 
@@ -46,6 +54,31 @@ public:
     void render();
     
     const sf::Texture& getGridTexture() const;
+    
+    sf::Vector2i getMapCoordAt(int x, int y) const;
+    
+    bool isInGrid(int x, int y) const;
+    
+    bool isPlaying() const;
+    
+    Case getWinner() const;
+    
+    sf::Vector2i getFirstCaseWin() const;
+    
+    sf::Vector2i getLastCaseWin() const;
+    
+    Direction getDirectionWin() const;
+    
+private:
+    void doGravity();
+    
+    void fall(unsigned int x, unsigned int y);
+    
+    void checkGame(Case first);
+    
+    bool checkDirection(int x, int y, Direction d, Case player);
+    
+    void setWinner(Case winner, sf::Vector2i coord, Direction dir);
 
 private:
     PlayState &m_state;
@@ -54,6 +87,10 @@ private:
     sf::Sprite m_background;
     sf::Sprite m_gridShape;
     sf::Sprite m_case1, m_case2;
+    bool m_playing;
+    Case m_winner; // NONE if no winner, else the player who's won
+    sf::Vector2i m_caseWin;
+    Direction m_directionWin;
 };
 
 #endif

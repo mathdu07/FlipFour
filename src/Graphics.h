@@ -38,6 +38,8 @@ public:
     
     sf::Texture const& getArrowLeft() const;
     sf::Texture const& getArrowRight() const;
+    
+    sf::Color getMainColor() const;
 
 private:
     sf::Texture m_button, m_buttonFired;

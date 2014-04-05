@@ -81,3 +81,8 @@ sf::Texture const& Graphics::getArrowRight() const
 {
     return m_arrowRight;
 }
+
+sf::Color Graphics::getMainColor() const
+{
+    return sf::Color(52, 39, 20, 255);
+}
