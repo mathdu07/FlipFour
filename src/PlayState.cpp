@@ -24,7 +24,7 @@ PlayState::PlayState(Game &game, bool multi)
   m_leave(&game, &Game::switchToMainMenu), 
   m_grid(*this), m_turn(NONE), m_gridSprite(),
   m_player1(), m_player2(), m_arrowLeft(), m_arrowRight(),
-  m_lineWin()
+  m_lineWin(), m_lineStep(0)
 {
     m_title.setText("Flip Four");
     m_subTitle.setText("1 vs 1");
@@ -113,20 +113,6 @@ void PlayState::handleEvent(sf::Event const &event)
                         {
                             setTurn(m_turn == PLAYER_1 ? PLAYER_2 : PLAYER_1);
                         }
-                        else if (m_grid.getWinner() != NONE)
-                        {
-                            std::cout << "Updating line" << std::endl;
-                            updateLine(m_grid.getDirectionWin());
-                            
-                            sf::Vector2f gridPos = m_gridSprite.getPosition() - m_gridSprite.getOrigin();
-                            sf::Vector2f gridSize = sf::Vector2f(m_gridSprite.getLocalBounds().width, m_gridSprite.getLocalBounds().height);
-                            std::cout << "Grid Bounds : (" << gridPos.x << ";" << gridPos.y << ")";
-                            std::cout << " with size (" << gridSize.x << ";" << gridSize.y << ")" << std::endl;
-                            sf::Vector2i coord = m_grid.getFirstCaseWin();
-                            m_lineWin.setPosition(gridPos.x + (coord.x + 0.5) * gridSize.x / GRID_SIZE,
-                            gridPos.y + (coord.y + 0.5) * gridSize.y / GRID_SIZE);
-                            //TODO Center line
-                        }
                     }
                 }
 
@@ -149,17 +135,17 @@ void PlayState::updateLine(Direction d)
     switch (d)
     {
     case HORIZONTAL:
-        m_lineWin.setSize(sf::Vector2f(3 * m_gridSprite.getLocalBounds().width / GRID_SIZE, 5));
+        m_lineWin.setSize(sf::Vector2f(3 * m_gridSprite.getLocalBounds().width / GRID_SIZE * m_lineStep, 3));
         m_lineWin.setRotation(0);
         break;
     case VERTICAL:
-        m_lineWin.setSize(sf::Vector2f(5, 3 * m_gridSprite.getLocalBounds().height / GRID_SIZE));
+        m_lineWin.setSize(sf::Vector2f(3, 3 * m_gridSprite.getLocalBounds().height / GRID_SIZE * m_lineStep));
         m_lineWin.setRotation(0);
         break;
     case LEFT_DIAGONAL:
     case RIGHT_DIAGONAL:
         m_lineWin.setSize(sf::Vector2f(sqrt(pow(3 * m_gridSprite.getLocalBounds().width / GRID_SIZE, 2) 
-            + pow(3 * m_gridSprite.getLocalBounds().height / GRID_SIZE, 2)), 5));
+            + pow(3 * m_gridSprite.getLocalBounds().height / GRID_SIZE, 2)) * m_lineStep, 3));
         m_lineWin.setRotation(d == LEFT_DIAGONAL ? 45 : -45);
         break;
     }
@@ -186,20 +172,40 @@ void PlayState::render(sf::RenderTarget &target)
     
     if (!m_grid.isPlaying())
     {
-        /*std::cout << "Drawing line" << std::endl;
-        sf::FloatRect f = m_lineWin.getLocalBounds();
-        std::cout << "Line begin from (" << f.left << ";" << f.top << ")";
-        std::cout << " to (" << f.width << ";" << f.height << ")";
-        sf::Color c = m_lineWin.getFillColor();
-        std::cout << " with color (" << (sf::Uint32) c.r << ";" << (sf::Uint32) c.g << ";";
-        std::cout << (sf::Uint32) c.b << ";" << (sf::Uint32) c.a << ")" << std::endl;*/
         target.draw(m_lineWin);
     }
 }
 
 void PlayState::update()
 {
-
+    if (!m_grid.isPlaying() && m_grid.getWinner() != NONE && m_lineStep < 1)
+    {
+        m_lineStep += 0.1; 
+        std::cout << "Updating line" << std::endl;
+        updateLine(m_grid.getDirectionWin());
+        
+        sf::Vector2f gridPos = m_gridSprite.getPosition() - m_gridSprite.getOrigin();
+        sf::Vector2f gridSize = sf::Vector2f(m_gridSprite.getLocalBounds().width, m_gridSprite.getLocalBounds().height);
+        std::cout << "Grid Bounds : (" << gridPos.x << ";" << gridPos.y << ")";
+        std::cout << " with size (" << gridSize.x << ";" << gridSize.y << ")" << std::endl;
+        sf::Vector2i coord = m_grid.getFirstCaseWin();
+        m_lineWin.setPosition(gridPos.x + (coord.x + 0.5) * gridSize.x / GRID_SIZE,
+        gridPos.y + (coord.y + 0.5) * gridSize.y / GRID_SIZE);
+        
+        switch (m_grid.getDirectionWin())
+        {
+        case HORIZONTAL:
+            m_lineWin.move(0, - m_lineWin.getSize().y / 2.f);
+            break;
+        case VERTICAL:
+            m_lineWin.move(- m_lineWin.getSize().x / 2.f, 0);
+            break;
+        case LEFT_DIAGONAL:
+        case RIGHT_DIAGONAL:
+            m_lineWin.move(- m_lineWin.getSize().y / 2.f, - m_lineWin.getSize().y / 2.f);
+            break;
+        }
+    }   
 }
     
 Case PlayState::getTurn() const

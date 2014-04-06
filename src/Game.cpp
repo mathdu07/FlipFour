@@ -42,7 +42,7 @@ sf::RenderWindow& Game::getWindow()
 
 void Game::run()
 {
-    m_window.create(sf::VideoMode(480, 800), "Flip Four");
+    m_window.create(sf::VideoMode(480, 800), "Flip Four", sf::Style::Titlebar | sf::Style::Close);
     m_assets.loadAssets();
     setState(new MainMenuState(*this));
     sf::Event event;

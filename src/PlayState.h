@@ -54,6 +54,7 @@ private:
     sf::ui::Label m_player1, m_player2;
     sf::ui::Button m_arrowLeft, m_arrowRight;
     sf::RectangleShape m_lineWin;
+    float m_lineStep;
 };
 
 #endif
