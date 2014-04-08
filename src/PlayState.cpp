@@ -24,7 +24,10 @@ PlayState::PlayState(Game &game, bool multi)
   m_leave(&game, &Game::switchToMainMenu), 
   m_grid(*this), m_turn(NONE), m_gridSprite(),
   m_player1(), m_player2(), m_arrowLeft(), m_arrowRight(),
-  m_lineWin(), m_lineStep(0)
+  m_lineWin(), m_lineStep(0), m_gameoverPanel(),
+  m_gameoverLabel(), m_gameoverWinner(), 
+  m_gameoverButton(&game, &Game::playMultiplayer),
+  m_gameover(false), m_gameoverUpdatesLeft(20)
 {
     m_title.setText("Flip Four");
     m_subTitle.setText("1 vs 1");
@@ -32,6 +35,9 @@ PlayState::PlayState(Game &game, bool multi)
     m_player1.setText("Player 1");
     m_player2.setText("Player 2");
     m_background.setFillColor(sf::Color::Red);
+    
+    m_gameoverLabel.setText("Game Over");
+    m_gameoverButton.setText("Replay");
     
     setTurn(PLAYER_1);
 }
@@ -84,6 +90,26 @@ void PlayState::init()
     m_arrowRight.setPosition(m_gridSprite.getPosition() + m_gridSprite.getOrigin());
     
     m_lineWin.setFillColor(g.getMainColor());
+    
+    m_gameoverPanel.setTexture(g.getGameoverBackground());
+    m_gameoverPanel.setPosition(sf::Vector2f(m_game.getSize()) / 2.f - sf::Vector2f(m_gameoverPanel.getLocalBounds().width, m_gameoverPanel.getLocalBounds().height) / 2.f);
+    
+    m_gameoverLabel.setFont(f.getBold());
+    m_gameoverLabel.setFontColor(sf::Color::White);
+    m_gameoverLabel.setFontSize(30);
+    m_gameoverLabel.setPosition(140, 180);
+    
+    m_gameoverWinner.setFont(f.getContent());
+    m_gameoverWinner.setFontColor(sf::Color::Black);
+    m_gameoverWinner.setFontSize(40);
+    m_gameoverWinner.setPosition(100, 370);
+    
+    m_gameoverButton.setFont(f.getContent());
+    m_gameoverButton.setFontColor(sf::Color::Black);
+    m_gameoverButton.setTexture(g.getButton());
+    m_gameoverButton.setTextureFocused(g.getButton());
+    m_gameoverButton.setTextureFired(g.getButtonFired());
+    m_gameoverButton.setPosition(m_game.getSize().x/2 - m_leave.getSize().x/2, 540);
 }
 
 void PlayState::handleEvent(sf::Event const &event)
@@ -113,6 +139,10 @@ void PlayState::handleEvent(sf::Event const &event)
                         {
                             setTurn(m_turn == PLAYER_1 ? PLAYER_2 : PLAYER_1);
                         }
+                        else
+                        {
+                            m_gameoverWinner.setText(m_grid.getWinner() == PLAYER_1 ? "Player 1 won" : (m_grid.getWinner() == PLAYER_2 ? "Player 2 won" : "   Tie !"));
+                        }
                     }
                 }
 
@@ -128,6 +158,11 @@ void PlayState::handleEvent(sf::Event const &event)
     m_leave.updateEvent(event);
     m_arrowLeft.updateEvent(event);
     m_arrowRight.updateEvent(event);
+    
+    if (m_gameover)
+    {
+        m_gameoverButton.updateEvent(event);
+    }
 }
 
 void PlayState::updateLine(Direction d)
@@ -174,6 +209,14 @@ void PlayState::render(sf::RenderTarget &target)
     {
         target.draw(m_lineWin);
     }
+    
+    if (m_gameover)
+    {
+            target.draw(m_gameoverPanel);
+            target.draw(m_gameoverLabel);
+            target.draw(m_gameoverWinner);
+            target.draw(m_gameoverButton);        
+    }
 }
 
 void PlayState::update()
@@ -205,7 +248,17 @@ void PlayState::update()
             m_lineWin.move(- m_lineWin.getSize().y / 2.f, - m_lineWin.getSize().y / 2.f);
             break;
         }
-    }   
+    }
+    
+    if (!m_grid.isPlaying() && m_gameoverUpdatesLeft > 0)
+    {
+        m_gameoverUpdatesLeft--;
+        
+        if (m_gameoverUpdatesLeft == 0)
+        {
+            m_gameover = true;
+        }
+    }
 }
     
 Case PlayState::getTurn() const

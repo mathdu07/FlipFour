@@ -21,7 +21,9 @@ Graphics::Graphics()
 : m_button(), m_buttonFired(),
   m_grid(), m_case(),
   m_player1(), m_player2(),
-  m_arrowLeft(), m_arrowRight()
+  m_arrowLeft(), m_arrowRight(),
+  m_gameoverBackground(),
+  m_mainColor(), m_secondColor()
 {
 
 }
@@ -40,6 +42,11 @@ void Graphics::load()
     
     m_arrowLeft.loadFromFile("res/gfx/arrow_left.png");
     m_arrowRight.loadFromFile("res/gfx/arrow_right.png");
+    
+    m_gameoverBackground.loadFromFile("res/gfx/gameover_background.png");
+    
+    m_mainColor = sf::Color(52, 39, 20);
+    m_secondColor = sf::Color(120, 109, 95);
 }
 
 sf::Texture const& Graphics::getButton() const
@@ -82,7 +89,17 @@ sf::Texture const& Graphics::getArrowRight() const
     return m_arrowRight;
 }
 
+sf::Texture const& Graphics::getGameoverBackground() const
+{
+    return m_gameoverBackground;
+}
+
 sf::Color Graphics::getMainColor() const
 {
-    return sf::Color(52, 39, 20, 255);
+    return m_mainColor;
+}
+
+sf::Color Graphics::getSecondColor() const
+{
+    return m_secondColor;
 }

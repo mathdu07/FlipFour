@@ -39,13 +39,18 @@ public:
     sf::Texture const& getArrowLeft() const;
     sf::Texture const& getArrowRight() const;
     
+    sf::Texture const& getGameoverBackground() const;
+    
     sf::Color getMainColor() const;
+    sf::Color getSecondColor() const;
 
 private:
     sf::Texture m_button, m_buttonFired;
     sf::Texture m_grid, m_case;
     sf::Texture m_player1, m_player2;
     sf::Texture m_arrowLeft, m_arrowRight;
+    sf::Texture m_gameoverBackground;
+    sf::Color m_mainColor, m_secondColor;
 };
 
 #endif

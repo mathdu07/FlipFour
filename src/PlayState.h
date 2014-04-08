@@ -55,6 +55,11 @@ private:
     sf::ui::Button m_arrowLeft, m_arrowRight;
     sf::RectangleShape m_lineWin;
     float m_lineStep;
+    sf::Sprite m_gameoverPanel;
+    sf::ui::Label m_gameoverLabel, m_gameoverWinner;
+    sf::ui::Button m_gameoverButton;
+    bool m_gameover;
+    sf::Uint32 m_gameoverUpdatesLeft;
 };
 
 #endif
