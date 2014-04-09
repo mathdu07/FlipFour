@@ -151,6 +151,36 @@ void Grid::fall(unsigned int x, unsigned int y)
     }
 }
 
+void Grid::flip(Case player, bool direction)
+{
+    Case clone[GRID_SIZE][GRID_SIZE];
+    cloneMap(clone);
+    
+    for (unsigned int x = 0; x < GRID_SIZE; x++)
+    {
+        for (unsigned int y = 0; y < GRID_SIZE; y++)
+        {
+            m_map[x][y] = clone[direction ? y : (GRID_SIZE - 1) - y][direction ? (GRID_SIZE - 1) - x : x];
+        }
+    }
+    
+    doGravity();
+    
+    // After flip the grid, the game will first check if the other player win, and only after if the player who's flipped win 
+    checkGame(player == PLAYER_1 ? PLAYER_2 : PLAYER_1);
+}
+
+void Grid::cloneMap(Case clone[GRID_SIZE][GRID_SIZE])
+{
+    for (unsigned int x = 0; x < GRID_SIZE; x++)
+    {
+        for (unsigned int y = 0; y < GRID_SIZE; y++)
+        {
+            clone[x][y] = m_map[x][y];
+        }
+    }
+}
+
 sf::Vector2i Grid::getFirstCaseWin() const
 {
     return m_caseWin;

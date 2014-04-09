@@ -23,11 +23,15 @@ PlayState::PlayState(Game &game, bool multi)
   m_background(), m_title(), m_subTitle(),
   m_leave(&game, &Game::switchToMainMenu), 
   m_grid(*this), m_turn(NONE), m_gridSprite(),
-  m_player1(), m_player2(), m_arrowLeft(), m_arrowRight(),
+  m_player1(), m_player2(),
+  m_arrowLeft(this, &PlayState::flipLeft),
+  m_arrowRight(this, &PlayState::flipRight),
   m_lineWin(), m_lineStep(0), m_gameoverPanel(),
   m_gameoverLabel(), m_gameoverWinner(), 
   m_gameoverButton(&game, &Game::playMultiplayer),
-  m_gameover(false), m_gameoverUpdatesLeft(20)
+  m_gameover(false), m_gameoverUpdatesLeft(20),
+  m_flipDirection(false), m_flipUpdatesLeft(0),
+  m_ready(true)
 {
     m_title.setText("Flip Four");
     m_subTitle.setText("1 vs 1");
@@ -114,7 +118,7 @@ void PlayState::init()
 
 void PlayState::handleEvent(sf::Event const &event)
 {
-    if (m_grid.isPlaying())
+    if (m_grid.isPlaying() && m_ready)
     {
         switch (event.type)
         {
@@ -258,6 +262,45 @@ void PlayState::update()
         {
             m_gameover = true;
         }
+    }
+    
+    if (m_flipUpdatesLeft > 0)
+    {
+        m_gridSprite.rotate((m_flipDirection ? 1 : -1) * 90 / (float) FLIPS_COUNT);
+        m_flipUpdatesLeft--;
+        
+        if (m_flipUpdatesLeft == 0)
+        {
+            m_gridSprite.setRotation(0);
+            m_grid.flip(m_turn, m_flipDirection);
+            setTurn(m_turn == PLAYER_1 ? PLAYER_2 : PLAYER_1);
+            m_ready = true;
+            
+            if (!m_grid.isPlaying())
+            {
+                m_gameoverWinner.setText(m_grid.getWinner() == PLAYER_1 ? "Player 1 won" : (m_grid.getWinner() == PLAYER_2 ? "Player 2 won" : "   Tie !"));
+            }
+        }
+    }
+}
+
+void PlayState::flipLeft()
+{
+    if (m_grid.isPlaying() && m_ready)
+    {
+        m_flipDirection = true;
+        m_flipUpdatesLeft = FLIPS_COUNT;
+        m_ready = false;
+    }
+}
+    
+void PlayState::flipRight()
+{
+    if (m_grid.isPlaying() && m_ready)
+    {
+        m_flipDirection = false;
+        m_flipUpdatesLeft = FLIPS_COUNT;
+        m_ready = false;
     }
 }
     

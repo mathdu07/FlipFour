@@ -69,6 +69,8 @@ public:
     
     Direction getDirectionWin() const;
     
+    void flip(Case player, bool direction); // True -> Flip left, False -> Flip right
+    
 private:
     void doGravity();
     
@@ -79,6 +81,8 @@ private:
     bool checkDirection(int x, int y, Direction d, Case player);
     
     void setWinner(Case winner, sf::Vector2i coord, Direction dir);
+    
+    void cloneMap(Case clone[GRID_SIZE][GRID_SIZE]);
 
 private:
     PlayState &m_state;

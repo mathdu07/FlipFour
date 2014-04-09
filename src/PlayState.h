@@ -21,6 +21,8 @@
 #include "State.h"
 #include "Grid.h"
 
+#define FLIPS_COUNT 20
+
 class PlayState : public State
 {
 public:
@@ -36,7 +38,11 @@ public:
 
     virtual void update();
     
-    Case getTurn() const;    
+    Case getTurn() const;
+    
+    void flipLeft();
+    
+    void flipRight();    
     
 private:
     void setTurn(Case c);
@@ -60,6 +66,9 @@ private:
     sf::ui::Button m_gameoverButton;
     bool m_gameover;
     sf::Uint32 m_gameoverUpdatesLeft;
+    bool m_flipDirection; // True -> Flip Left, false -> Flip Right
+    sf::Uint32 m_flipUpdatesLeft;
+    bool m_ready;
 };
 
 #endif
