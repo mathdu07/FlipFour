@@ -39,6 +39,9 @@ public:
     sf::Texture const& getArrowLeft() const;
     sf::Texture const& getArrowRight() const;
     
+    sf::Texture const& getArrowLeftFired() const;
+    sf::Texture const& getArrowRightFired() const;
+    
     sf::Texture const& getGameoverBackground() const;
     
     sf::Color getMainColor() const;
@@ -49,6 +52,7 @@ private:
     sf::Texture m_grid, m_case;
     sf::Texture m_player1, m_player2;
     sf::Texture m_arrowLeft, m_arrowRight;
+    sf::Texture m_arrowLeftFired, m_arrowRightFired;
     sf::Texture m_gameoverBackground;
     sf::Color m_mainColor, m_secondColor;
 };

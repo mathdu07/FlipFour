@@ -22,6 +22,7 @@ Graphics::Graphics()
   m_grid(), m_case(),
   m_player1(), m_player2(),
   m_arrowLeft(), m_arrowRight(),
+  m_arrowLeftFired(), m_arrowRightFired(),
   m_gameoverBackground(),
   m_mainColor(), m_secondColor()
 {
@@ -42,6 +43,9 @@ void Graphics::load()
     
     m_arrowLeft.loadFromFile("res/gfx/arrow_left.png");
     m_arrowRight.loadFromFile("res/gfx/arrow_right.png");
+    
+    m_arrowLeftFired.loadFromFile("res/gfx/arrow_left_fired.png");
+    m_arrowRightFired.loadFromFile("res/gfx/arrow_right_fired.png");
     
     m_gameoverBackground.loadFromFile("res/gfx/gameover_background.png");
     
@@ -87,6 +91,16 @@ sf::Texture const& Graphics::getArrowLeft() const
 sf::Texture const& Graphics::getArrowRight() const
 {
     return m_arrowRight;
+}
+
+sf::Texture const& Graphics::getArrowLeftFired() const
+{
+    return m_arrowLeftFired;
+}
+
+sf::Texture const& Graphics::getArrowRightFired() const
+{
+    return m_arrowRightFired;
 }
 
 sf::Texture const& Graphics::getGameoverBackground() const

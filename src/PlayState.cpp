@@ -85,12 +85,12 @@ void PlayState::init()
     
     m_arrowLeft.setTexture(g.getArrowLeft());
     m_arrowLeft.setTextureFocused(g.getArrowLeft());
-    m_arrowLeft.setTextureFired(g.getArrowLeft());
+    m_arrowLeft.setTextureFired(g.getArrowLeftFired());
     m_arrowLeft.setPosition(m_gridSprite.getPosition() + m_gridSprite.getOrigin() - sf::Vector2f(gridTex.getSize().x + g.getArrowLeft().getSize().x, 0));
     
     m_arrowRight.setTexture(g.getArrowRight());
     m_arrowRight.setTextureFocused(g.getArrowRight());
-    m_arrowRight.setTextureFired(g.getArrowRight());
+    m_arrowRight.setTextureFired(g.getArrowRightFired());
     m_arrowRight.setPosition(m_gridSprite.getPosition() + m_gridSprite.getOrigin());
     
     m_lineWin.setFillColor(g.getMainColor());
