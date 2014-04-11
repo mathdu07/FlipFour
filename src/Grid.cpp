@@ -81,16 +81,18 @@ void Grid::render()
             
             if (c == PLAYER_1)
             {
-                m_case1.setPosition(x * (bounds.width / GRID_SIZE), bounds.height - (y+1) * (bounds.height / GRID_SIZE));
+                m_case1.setPosition(x * (bounds.width / GRID_SIZE), y * (bounds.height / GRID_SIZE));
                 m_target.draw(m_case1);
             }
             else if (c == PLAYER_2)
             {
-                m_case2.setPosition(x * (bounds.width / GRID_SIZE), bounds.height - (y+1) * (bounds.height / GRID_SIZE));
+                m_case2.setPosition(x * (bounds.width / GRID_SIZE), y * (bounds.height / GRID_SIZE));
                 m_target.draw(m_case2);
             }
         }
     }
+    
+    m_target.display();
 }
 
 const sf::Texture& Grid::getGridTexture() const
