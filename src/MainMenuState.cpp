@@ -20,7 +20,8 @@
 MainMenuState::MainMenuState(Game &game)
 : State(game), m_background(), m_title(),
   m_singleplayerButton(), m_multiplayerButton(&game, &Game::playMultiplayer),
-  m_aboutButton(&game, &Game::switchToAbout), m_exitButton(&game, &Game::exit)
+  m_aboutButton(&game, &Game::switchToAbout), m_exitButton(&game, &Game::exit),
+  m_versionType()
 {
     m_singleplayerButton.setText("Single Player");
     m_multiplayerButton.setText("Multi Player");
@@ -29,6 +30,7 @@ MainMenuState::MainMenuState(Game &game)
     m_title.setText("Flip Four");
     m_background.setSize(sf::Vector2f(game.getSize().x, game.getSize().y));
     m_background.setFillColor(sf::Color::Red);
+    m_versionType.setText("Beta Prototype");
 }
 
 void MainMenuState::init()
@@ -69,6 +71,11 @@ void MainMenuState::init()
     m_multiplayerButton.setPosition(m_game.getSize().x/2 - m_multiplayerButton.getSize().x/2, 350);
     m_aboutButton.setPosition(m_game.getSize().x/2 - m_aboutButton.getSize().x/2, 500);
     m_exitButton.setPosition(m_game.getSize().x/2 - m_exitButton.getSize().x/2, 650);
+    
+    m_versionType.setFont(f.getContent());
+    m_versionType.setFontColor(sf::Color::White);
+    m_versionType.setFontSize(15);
+    m_versionType.setPosition(5, m_game.getSize().y - 25);
 }
 
 void MainMenuState::handleEvent(sf::Event const &event)
@@ -93,6 +100,7 @@ void MainMenuState::render(sf::RenderTarget &target)
     target.draw(m_multiplayerButton);
     target.draw(m_aboutButton);
     target.draw(m_exitButton);
+    target.draw(m_versionType);
 }
 
 void MainMenuState::update()
