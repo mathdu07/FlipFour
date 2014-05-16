@@ -38,7 +38,7 @@ public:
 private:
     sf::RectangleShape m_background;
     sf::ui::Label m_title;
-    sf::ui::Button m_singleplayerButton, m_multiplayerButton, m_aboutButton, m_exitButton;
+    sf::ui::Button m_versusButton, m_aboutButton, m_exitButton;
     sf::ui::Label m_versionType;
 };
 

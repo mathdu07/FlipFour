@@ -19,7 +19,7 @@ Dependencies
 General :
 
 * [SFML 2.1+](http://www.sfml-dev.org/download.php)
-* [SFML-UI 0.3.1+](https://github.com/PatateDev/sfml-ui/releases)
+* [SFML-UI 0.4.1+](https://github.com/PatateDev/sfml-ui/releases)
 
 GNU/Linux packages (on Debian) :
 

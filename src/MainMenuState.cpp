@@ -19,12 +19,11 @@
 
 MainMenuState::MainMenuState(Game &game)
 : State(game), m_background(), m_title(),
-  m_singleplayerButton(), m_multiplayerButton(&game, &Game::playMultiplayer),
+  m_versusButton(&game, &Game::playMultiplayer),
   m_aboutButton(&game, &Game::switchToAbout), m_exitButton(&game, &Game::exit),
   m_versionType()
 {
-    m_singleplayerButton.setText("Single Player");
-    m_multiplayerButton.setText("Multi Player");
+    m_versusButton.setText("Versus");
     m_aboutButton.setText("About");
     m_exitButton.setText("Exit");
     m_title.setText("Flip Four");
@@ -36,52 +35,45 @@ MainMenuState::MainMenuState(Game &game)
 void MainMenuState::init()
 {
     Graphics const &g = m_game.gfx();
-    m_singleplayerButton.setTexture(g.getButton());
-    m_multiplayerButton.setTexture(g.getButton());
+    m_versusButton.setTexture(g.getBigButton());
     m_aboutButton.setTexture(g.getButton());
     m_exitButton.setTexture(g.getButton());
-
-    m_singleplayerButton.setTextureFocused(g.getButton());
-    m_multiplayerButton.setTextureFocused(g.getButton());
+    
+    m_versusButton.setTextureFocused(g.getBigButton());
     m_aboutButton.setTextureFocused(g.getButton());
     m_exitButton.setTextureFocused(g.getButton());
 
-    m_singleplayerButton.setTextureFired(g.getButtonFired());
-    m_multiplayerButton.setTextureFired(g.getButtonFired());
+    m_versusButton.setTextureFired(g.getBigButtonFired());
     m_aboutButton.setTextureFired(g.getButtonFired());
     m_exitButton.setTextureFired(g.getButtonFired());
 
     Fonts const &f = m_game.fonts();
-    m_singleplayerButton.setFont(f.getContent());
-    m_multiplayerButton.setFont(f.getContent());
+    m_versusButton.setFont(f.getBold());
     m_aboutButton.setFont(f.getContent());
     m_exitButton.setFont(f.getContent());
 
-    m_singleplayerButton.setFontColor(sf::Color::Black);
-    m_multiplayerButton.setFontColor(sf::Color::Black);
+    m_versusButton.setFontColor(sf::Color::Black);
     m_aboutButton.setFontColor(sf::Color::Black);
     m_exitButton.setFontColor(sf::Color::Black);
 
     m_title.setFont(f.getBold());
     m_title.setFontColor(sf::Color::White);
-    m_title.setFontSize(45);
-    m_title.setPosition(m_game.getSize().x/2 - 120, 50);
+    m_title.setFontSize(50);
+    m_title.setPosition(m_game.getSize().x/2 - m_title.getSize().x/2, 25);
 
-    m_singleplayerButton.setPosition(m_game.getSize().x/2 - m_singleplayerButton.getSize().x/2, 200);
-    m_multiplayerButton.setPosition(m_game.getSize().x/2 - m_multiplayerButton.getSize().x/2, 350);
-    m_aboutButton.setPosition(m_game.getSize().x/2 - m_aboutButton.getSize().x/2, 500);
-    m_exitButton.setPosition(m_game.getSize().x/2 - m_exitButton.getSize().x/2, 650);
+    m_versusButton.setPosition(m_game.getSize().x/2 - m_versusButton.getSize().x/2, m_game.getSize().y/2 - m_versusButton.getSize().y/2);
+    m_aboutButton.setPosition(20, m_game.getSize().y - m_aboutButton.getSize().y - 10);
+    m_exitButton.setPosition(m_game.getSize().x - m_exitButton.getSize().x - 20, m_game.getSize().y - m_exitButton.getSize().y - 10);
     
     m_versionType.setFont(f.getContent());
     m_versionType.setFontColor(sf::Color::White);
-    m_versionType.setFontSize(15);
-    m_versionType.setPosition(5, m_game.getSize().y - 25);
+    m_versionType.setFontSize(22);
+    m_versionType.setPosition(m_game.getSize().x/2 - m_versionType.getSize().x/2, m_game.getSize().y - m_versionType.getSize().y - 20);
 }
 
 void MainMenuState::handleEvent(sf::Event const &event)
 {
-    m_singleplayerButton.updateEvent(event);
-    m_multiplayerButton.updateEvent(event);
+    m_versusButton.updateEvent(event);
     m_aboutButton.updateEvent(event);
     m_exitButton.updateEvent(event);
     m_title.updateEvent(event);
@@ -96,8 +88,7 @@ void MainMenuState::render(sf::RenderTarget &target)
 {
     target.draw(m_background); // TODO Background
     target.draw(m_title);
-    target.draw(m_singleplayerButton);
-    target.draw(m_multiplayerButton);
+    target.draw(m_versusButton);
     target.draw(m_aboutButton);
     target.draw(m_exitButton);
     target.draw(m_versionType);

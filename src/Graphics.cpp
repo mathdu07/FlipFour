@@ -19,6 +19,7 @@
 
 Graphics::Graphics()
 : m_button(), m_buttonFired(),
+  m_bigButton(), m_bigButtonFired(),
   m_grid(), m_case(),
   m_player1(), m_player2(),
   m_arrowLeft(), m_arrowRight(),
@@ -33,6 +34,9 @@ void Graphics::load()
 {
     m_button.loadFromFile("res/gfx/button.png");
     m_buttonFired.loadFromFile("res/gfx/button_fired.png");
+    
+    m_bigButton.loadFromFile("res/gfx/big_button.png");
+    m_bigButtonFired.loadFromFile("res/gfx/big_button_fired.png");
     
     m_grid.loadFromFile("res/gfx/grid.png");
     m_case.loadFromFile("res/gfx/case.png");
@@ -61,6 +65,16 @@ sf::Texture const& Graphics::getButton() const
 sf::Texture const& Graphics::getButtonFired() const
 {
     return m_buttonFired;
+}
+
+sf::Texture const& Graphics::getBigButton() const
+{
+    return m_bigButton;
+}
+
+sf::Texture const& Graphics::getBigButtonFired() const
+{
+    return m_bigButtonFired;
 }
 
 sf::Texture const& Graphics::getGrid() const
