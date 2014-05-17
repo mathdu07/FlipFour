@@ -51,32 +51,32 @@ void AboutState::init()
     m_title.setFont(f.getBold());
     m_title.setFontSize(45);
     m_title.setFontColor(sf::Color::White);
-    m_title.setPosition(m_game.getSize().x / 2 - 80, 50);
+    m_title.setPosition(m_game.getSize().x / 2 - m_title.getSize().x / 2, 20);
 
     m_developer.setFont(f.getContent());
     m_developer.setFontSize(25);
     m_developer.setFontColor(sf::Color::White);
-    m_developer.setPosition(20, 200);
+    m_developer.setPosition(m_game.getSize().x/2 - m_developer.getSize().x/2, 100);
     
     m_idea.setFont(f.getContent());
     m_idea.setFontSize(25);
     m_idea.setFontColor(sf::Color::White);
-    m_idea.setPosition(20, 250);
+    m_idea.setPosition(m_game.getSize().x/2 - m_idea.getSize().x/2, 150);
 
     m_license.setFont(f.getContent());
     m_license.setFontSize(25);
     m_license.setFontColor(sf::Color::White);
-    m_license.setPosition(20, 400);
+    m_license.setPosition(m_game.getSize().x/2 - m_license.getSize().x/2, 280);
     
     m_libs.setFont(f.getContent());
     m_libs.setFontSize(25);
     m_libs.setFontColor(sf::Color::White);
-    m_libs.setPosition(20, 450);
+    m_libs.setPosition(m_game.getSize().x/2 - m_libs.getSize().x/2, 320);
 
     m_version.setFont(f.getContent());
     m_version.setFontSize(25);
     m_version.setFontColor(sf::Color::White);
-    m_version.setPosition(20, 500);
+    m_version.setPosition(m_game.getSize().x - m_version.getSize().x - 20, m_game.getSize().y - m_version.getSize().y - 30);
 
     Graphics const &g = m_game.gfx();
     m_back.setTexture(g.getButton());
@@ -85,7 +85,7 @@ void AboutState::init()
     m_back.setFont(f.getContent());
     m_back.setFontSize(25);
     m_back.setFontColor(sf::Color::Black);
-    m_back.setPosition(m_game.getSize().x / 2 - m_back.getSize().x / 2, 700);
+    m_back.setPosition(m_game.getSize().x / 2 - m_back.getSize().x / 2, m_game.getSize().y - m_back.getSize().y - 20);
 }
 
 void AboutState::handleEvent(sf::Event const &event)
