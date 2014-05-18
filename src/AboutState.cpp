@@ -38,8 +38,6 @@ AboutState::AboutState(Game &game)
 
     m_version.setText(version.str());
 
-    m_back.setText("<- Back");
-
     m_background.setFillColor(sf::Color::Red);
 }
 
@@ -76,16 +74,13 @@ void AboutState::init()
     m_version.setFont(f.getContent());
     m_version.setFontSize(25);
     m_version.setFontColor(sf::Color::White);
-    m_version.setPosition(m_game.getSize().x - m_version.getSize().x - 20, m_game.getSize().y - m_version.getSize().y - 30);
+    m_version.setPosition(m_game.getSize().x/2 - m_version.getSize().x/2, 360);
 
     Graphics const &g = m_game.gfx();
-    m_back.setTexture(g.getButton());
-    m_back.setTextureFocused(g.getButton());
-    m_back.setTextureFired(g.getButtonFired());
-    m_back.setFont(f.getContent());
-    m_back.setFontSize(25);
-    m_back.setFontColor(sf::Color::Black);
-    m_back.setPosition(m_game.getSize().x / 2 - m_back.getSize().x / 2, m_game.getSize().y - m_back.getSize().y - 20);
+    m_back.setTexture(g.getReturn());
+    m_back.setTextureFocused(g.getReturn());
+    m_back.setTextureFired(g.getReturnFired());
+    m_back.setPosition(m_game.getSize().x - m_back.getSize().x - 20, m_game.getSize().y - m_back.getSize().y - 20);
 }
 
 void AboutState::handleEvent(sf::Event const &event)

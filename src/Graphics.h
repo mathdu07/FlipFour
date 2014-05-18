@@ -33,6 +33,9 @@ public:
     sf::Texture const& getBigButton() const;
     sf::Texture const& getBigButtonFired() const;
     
+    sf::Texture const& getReturn() const;
+    sf::Texture const& getReturnFired() const;
+    
     sf::Texture const& getGrid() const;
     sf::Texture const& getCase() const;
     
@@ -53,6 +56,7 @@ public:
 private:
     sf::Texture m_button, m_buttonFired;
     sf::Texture m_bigButton, m_bigButtonFired;
+    sf::Texture m_return, m_returnFired;
     sf::Texture m_grid, m_case;
     sf::Texture m_player1, m_player2;
     sf::Texture m_arrowLeft, m_arrowRight;
