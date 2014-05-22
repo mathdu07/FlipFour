@@ -40,9 +40,13 @@ public:
     
     Case getTurn() const;
     
-    void flipLeft();
+    void flipLeft1();
     
-    void flipRight();    
+    void flipRight1();
+    
+    void flipLeft2();
+    
+    void flipRight2();
     
 private:
     void setTurn(Case c);
@@ -53,12 +57,10 @@ private:
     bool m_multiplayer; // True -> Multiplayer, False -> Singleplayer VS AI
     sf::RectangleShape m_background;
     sf::ui::Label m_title, m_subTitle;
-    sf::ui::Button m_leave;
     Grid m_grid;
     Case m_turn;
     sf::Sprite m_gridSprite;
-    sf::ui::Label m_player1, m_player2;
-    sf::ui::Button m_arrowLeft, m_arrowRight;
+    sf::ui::Button m_arrowTop1, m_arrowBottom1, m_arrowTop2, m_arrowBottom2;
     sf::RectangleShape m_lineWin;
     float m_lineStep;
     sf::Sprite m_gameoverPanel;

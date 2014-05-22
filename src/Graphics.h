@@ -42,11 +42,17 @@ public:
     sf::Texture const& getPlayer1() const;
     sf::Texture const& getPlayer2() const;
     
-    sf::Texture const& getArrowLeft() const;
-    sf::Texture const& getArrowRight() const;
+    sf::Texture const& getArrowBottomLeft() const;
+    sf::Texture const& getArrowBottomRight() const;
     
-    sf::Texture const& getArrowLeftFired() const;
-    sf::Texture const& getArrowRightFired() const;
+    sf::Texture const& getArrowBottomLeftFired() const;
+    sf::Texture const& getArrowBottomRightFired() const;
+    
+    sf::Texture const& getArrowTopLeft() const;
+    sf::Texture const& getArrowTopRight() const;
+    
+    sf::Texture const& getArrowTopLeftFired() const;
+    sf::Texture const& getArrowTopRightFired() const;
     
     sf::Texture const& getGameoverBackground() const;
     
@@ -59,8 +65,10 @@ private:
     sf::Texture m_return, m_returnFired;
     sf::Texture m_grid, m_case;
     sf::Texture m_player1, m_player2;
-    sf::Texture m_arrowLeft, m_arrowRight;
-    sf::Texture m_arrowLeftFired, m_arrowRightFired;
+    sf::Texture m_arrowBottomLeft, m_arrowBottomRight;
+    sf::Texture m_arrowBottomLeftFired, m_arrowBottomRightFired;
+    sf::Texture m_arrowTopLeft, m_arrowTopRight;
+    sf::Texture m_arrowTopLeftFired, m_arrowTopRightFired;
     sf::Texture m_gameoverBackground;
     sf::Color m_mainColor, m_secondColor;
 };

@@ -23,8 +23,10 @@ Graphics::Graphics()
   m_return(), m_returnFired(),
   m_grid(), m_case(),
   m_player1(), m_player2(),
-  m_arrowLeft(), m_arrowRight(),
-  m_arrowLeftFired(), m_arrowRightFired(),
+  m_arrowBottomLeft(), m_arrowBottomRight(),
+  m_arrowBottomLeftFired(), m_arrowBottomRightFired(),
+  m_arrowTopLeft(), m_arrowTopRight(),
+  m_arrowTopLeftFired(), m_arrowTopRightFired(),
   m_gameoverBackground(),
   m_mainColor(), m_secondColor()
 {
@@ -49,11 +51,14 @@ void Graphics::load()
     m_player1.loadFromFile("res/gfx/player_1.png");
     m_player2.loadFromFile("res/gfx/player_2.png");
     
-    m_arrowLeft.loadFromFile("res/gfx/arrow_left.png");
-    m_arrowRight.loadFromFile("res/gfx/arrow_right.png");
-    
-    m_arrowLeftFired.loadFromFile("res/gfx/arrow_left_fired.png");
-    m_arrowRightFired.loadFromFile("res/gfx/arrow_right_fired.png");
+    m_arrowBottomLeft.loadFromFile("res/gfx/arrow_bl.png");
+    m_arrowBottomLeftFired.loadFromFile("res/gfx/arrow_bl_fired.png");
+    m_arrowBottomRight.loadFromFile("res/gfx/arrow_br.png");
+    m_arrowBottomRightFired.loadFromFile("res/gfx/arrow_br_fired.png");
+    m_arrowTopLeft.loadFromFile("res/gfx/arrow_tl.png");
+    m_arrowTopLeftFired.loadFromFile("res/gfx/arrow_tl_fired.png");
+    m_arrowTopRight.loadFromFile("res/gfx/arrow_tr.png");
+    m_arrowTopRightFired.loadFromFile("res/gfx/arrow_tr_fired.png");
     
     m_gameoverBackground.loadFromFile("res/gfx/gameover_background.png");
     
@@ -111,24 +116,44 @@ sf::Texture const& Graphics::getPlayer2() const
     return m_player2;
 }
 
-sf::Texture const& Graphics::getArrowLeft() const
+sf::Texture const& Graphics::getArrowBottomLeft() const
 {
-    return m_arrowLeft;
+	return m_arrowBottomLeft;
 }
 
-sf::Texture const& Graphics::getArrowRight() const
+sf::Texture const& Graphics::getArrowBottomRight() const
 {
-    return m_arrowRight;
+	return m_arrowBottomRight;
+}
+    
+sf::Texture const& Graphics::getArrowBottomLeftFired() const
+{
+	return m_arrowBottomLeftFired;
 }
 
-sf::Texture const& Graphics::getArrowLeftFired() const
+sf::Texture const& Graphics::getArrowBottomRightFired() const
 {
-    return m_arrowLeftFired;
+	return m_arrowBottomRightFired;
 }
 
-sf::Texture const& Graphics::getArrowRightFired() const
+sf::Texture const& Graphics::getArrowTopLeft() const
 {
-    return m_arrowRightFired;
+	return m_arrowTopLeft;
+}
+
+sf::Texture const& Graphics::getArrowTopRight() const
+{
+	return m_arrowTopRight;
+}
+    
+sf::Texture const& Graphics::getArrowTopLeftFired() const
+{
+	return m_arrowTopLeftFired;
+}
+
+sf::Texture const& Graphics::getArrowTopRightFired() const
+{
+	return m_arrowTopRightFired;
 }
 
 sf::Texture const& Graphics::getGameoverBackground() const
