@@ -19,7 +19,7 @@
 #include "PlayState.h"
 
 Grid::Grid(PlayState &state)
-: m_state(state), m_background(), m_gridShape(),
+: m_state(state), m_background(), m_case(),
   m_case1(), m_case2(), m_playing(true), m_winner(NONE),
   m_caseWin(), m_directionWin()
 {
@@ -45,8 +45,7 @@ void Grid::init()
     m_background.setTexture(gfx.getGrid(), true);
     sf::Rect<float> bounds = m_background.getLocalBounds();
     
-    m_gridShape.setTexture(gfx.getCase());
-    m_gridShape.setTextureRect(sf::IntRect(0, 0, bounds.width, bounds.height));
+    m_case.setTexture(gfx.getCase());
     
     m_case1.setTexture(gfx.getPlayer1(), true);
     m_case2.setTexture(gfx.getPlayer2(), true);
@@ -70,7 +69,6 @@ void Grid::setCaseAt(sf::Uint32 x, sf::Uint32 y, Case c)
 void Grid::render()
 {
     m_target.draw(m_background);
-    m_target.draw(m_gridShape);
     
     for (unsigned int x = 0; x < GRID_SIZE; x++)
     {
@@ -78,6 +76,9 @@ void Grid::render()
         {
             Case c = m_map[x][y];
             sf::FloatRect bounds = m_background.getLocalBounds();
+            
+            m_case.setPosition(x * (bounds.width / GRID_SIZE), y * (bounds.height / GRID_SIZE));
+            m_target.draw(m_case);
             
             if (c == PLAYER_1)
             {

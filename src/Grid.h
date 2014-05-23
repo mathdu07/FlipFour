@@ -89,7 +89,7 @@ private:
     Case m_map[GRID_SIZE][GRID_SIZE];
     sf::RenderTexture m_target;
     sf::Sprite m_background;
-    sf::Sprite m_gridShape;
+    sf::Sprite m_case;
     sf::Sprite m_case1, m_case2;
     bool m_playing;
     Case m_winner; // NONE if no winner, else the player who's won
