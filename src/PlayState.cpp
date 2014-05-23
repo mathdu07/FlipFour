@@ -27,8 +27,9 @@ PlayState::PlayState(Game &game, bool multi)
   m_arrowTop2(this, &PlayState::flipRight2),
   m_arrowBottom2(this, &PlayState::flipLeft2),
   m_lineWin(), m_lineStep(0), m_gameoverPanel(),
-  m_gameoverLabel(), m_gameoverWinner(), 
-  m_gameoverButton(&game, &Game::playMultiplayer),
+  m_gameoverWinner(), 
+  m_gameoverRestart(&game, &Game::playMultiplayer),
+  m_gameoverLeave(&game, &Game::switchToMainMenu),
   m_gameover(false), m_gameoverUpdatesLeft(20),
   m_flipDirection(false), m_flipUpdatesLeft(0),
   m_ready(true)
@@ -36,9 +37,6 @@ PlayState::PlayState(Game &game, bool multi)
     m_title.setText("Flip Four");
     m_subTitle.setText("1 vs 1");
     m_background.setFillColor(sf::Color::Red);
-    
-    m_gameoverLabel.setText("Game Over");
-    m_gameoverButton.setText("Replay");
     
     setTurn(PLAYER_1);
 }
@@ -90,23 +88,21 @@ void PlayState::init()
     
     m_gameoverPanel.setTexture(g.getGameoverBackground());
     m_gameoverPanel.setPosition(sf::Vector2f(m_game.getSize()) / 2.f - sf::Vector2f(m_gameoverPanel.getLocalBounds().width, m_gameoverPanel.getLocalBounds().height) / 2.f);
-    
-    m_gameoverLabel.setFont(f.getBold());
-    m_gameoverLabel.setFontColor(sf::Color::White);
-    m_gameoverLabel.setFontSize(30);
-    m_gameoverLabel.setPosition(m_game.getSize().x/2 - m_gameoverLabel.getSize().x/2, m_gameoverPanel.getPosition().y + 10);
-    
+       
     m_gameoverWinner.setFont(f.getContent());
-    m_gameoverWinner.setFontColor(sf::Color::Black);
+    m_gameoverWinner.setFontColor(g.getContentColor());
     m_gameoverWinner.setFontSize(40);
-    m_gameoverWinner.setPosition(m_game.getSize().x/2 - m_gameoverWinner.getSize().x/2, m_gameoverPanel.getPosition().y + 200);
+    m_gameoverWinner.setPosition(m_game.getSize().x/2 - m_gameoverWinner.getSize().x/2, m_gameoverPanel.getPosition().y + 50);
     
-    m_gameoverButton.setFont(f.getContent());
-    m_gameoverButton.setFontColor(sf::Color::Black);
-    m_gameoverButton.setTexture(g.getButton());
-    m_gameoverButton.setTextureFocused(g.getButton());
-    m_gameoverButton.setTextureFired(g.getButtonFired());
-    m_gameoverButton.setPosition(m_game.getSize().x/2 - m_gameoverButton.getSize().x/2, m_gameoverPanel.getPosition().y + m_gameoverPanel.getLocalBounds().height - m_gameoverButton.getSize().y - 20);
+    m_gameoverRestart.setTexture(g.getRestart());
+    m_gameoverRestart.setTextureFocused(g.getRestart());
+    m_gameoverRestart.setTextureFired(g.getRestartFired());
+    m_gameoverRestart.setPosition(m_gameoverPanel.getPosition().x + 20, m_gameoverPanel.getPosition().y + m_gameoverPanel.getLocalBounds().height - m_gameoverRestart.getSize().y - 20);
+    
+    m_gameoverLeave.setTexture(g.getReturn());
+    m_gameoverLeave.setTextureFocused(g.getReturn());
+    m_gameoverLeave.setTextureFired(g.getReturnFired());
+    m_gameoverLeave.setPosition(m_gameoverPanel.getPosition().x + m_gameoverPanel.getLocalBounds().width - m_gameoverLeave.getSize().x - 20, m_gameoverPanel.getPosition().y + m_gameoverPanel.getLocalBounds().height - m_gameoverLeave.getSize().y - 20);
 }
 
 void PlayState::handleEvent(sf::Event const &event)
@@ -139,7 +135,7 @@ void PlayState::handleEvent(sf::Event const &event)
                         else
                         {
                             m_gameoverWinner.setText(m_grid.getWinner() == PLAYER_1 ? "Player 1 won" : (m_grid.getWinner() == PLAYER_2 ? "Player 2 won" : "Tie !"));
-                            m_gameoverWinner.setPosition(m_game.getSize().x/2 - m_gameoverWinner.getSize().x/2, m_gameoverPanel.getPosition().y + 200);
+                            m_gameoverWinner.setPosition(m_game.getSize().x/2 - m_gameoverWinner.getSize().x/2, m_gameoverPanel.getPosition().y + 50);
                         }
                     }
                 }
@@ -160,7 +156,8 @@ void PlayState::handleEvent(sf::Event const &event)
     
     if (m_gameover)
     {
-        m_gameoverButton.updateEvent(event);
+        m_gameoverRestart.updateEvent(event);
+        m_gameoverLeave.updateEvent(event);
     }
 }
 
@@ -211,9 +208,9 @@ void PlayState::render(sf::RenderTarget &target)
     if (m_gameover)
     {
             target.draw(m_gameoverPanel);
-            target.draw(m_gameoverLabel);
             target.draw(m_gameoverWinner);
-            target.draw(m_gameoverButton);        
+            target.draw(m_gameoverRestart);     
+            target.draw(m_gameoverLeave);   
     }
 }
 
@@ -273,7 +270,7 @@ void PlayState::update()
             if (!m_grid.isPlaying())
             {
                 m_gameoverWinner.setText(m_grid.getWinner() == PLAYER_1 ? "Player 1 won" : (m_grid.getWinner() == PLAYER_2 ? "Player 2 won" : "Tie !"));
-                m_gameoverWinner.setPosition(m_game.getSize().x/2 - m_gameoverWinner.getSize().x/2, m_gameoverPanel.getPosition().y + 200);
+                m_gameoverWinner.setPosition(m_game.getSize().x/2 - m_gameoverWinner.getSize().x/2, m_gameoverPanel.getPosition().y + 50);
             }
         }
     }

@@ -36,6 +36,9 @@ public:
     sf::Texture const& getReturn() const;
     sf::Texture const& getReturnFired() const;
     
+    sf::Texture const& getRestart() const;
+    sf::Texture const& getRestartFired() const;
+    
     sf::Texture const& getGrid() const;
     sf::Texture const& getCase() const;
     
@@ -58,11 +61,13 @@ public:
     
     sf::Color getMainColor() const;
     sf::Color getSecondColor() const;
+    sf::Color getContentColor() const;
 
 private:
     sf::Texture m_button, m_buttonFired;
     sf::Texture m_bigButton, m_bigButtonFired;
     sf::Texture m_return, m_returnFired;
+    sf::Texture m_restart, m_restartFired;
     sf::Texture m_grid, m_case;
     sf::Texture m_player1, m_player2;
     sf::Texture m_arrowBottomLeft, m_arrowBottomRight;
@@ -70,7 +75,7 @@ private:
     sf::Texture m_arrowTopLeft, m_arrowTopRight;
     sf::Texture m_arrowTopLeftFired, m_arrowTopRightFired;
     sf::Texture m_gameoverBackground;
-    sf::Color m_mainColor, m_secondColor;
+    sf::Color m_mainColor, m_secondColor, m_contentColor;
 };
 
 #endif

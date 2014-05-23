@@ -21,6 +21,7 @@ Graphics::Graphics()
 : m_button(), m_buttonFired(),
   m_bigButton(), m_bigButtonFired(),
   m_return(), m_returnFired(),
+  m_restart(), m_restartFired(),
   m_grid(), m_case(),
   m_player1(), m_player2(),
   m_arrowBottomLeft(), m_arrowBottomRight(),
@@ -28,7 +29,7 @@ Graphics::Graphics()
   m_arrowTopLeft(), m_arrowTopRight(),
   m_arrowTopLeftFired(), m_arrowTopRightFired(),
   m_gameoverBackground(),
-  m_mainColor(), m_secondColor()
+  m_mainColor(), m_secondColor(), m_contentColor()
 {
 
 }
@@ -43,6 +44,9 @@ void Graphics::load()
     
     m_return.loadFromFile("res/gfx/return.png");
     m_returnFired.loadFromFile("res/gfx/return_fired.png");
+    
+    m_restart.loadFromFile("res/gfx/restart.png");
+    m_restartFired.loadFromFile("res/gfx/restart_fired.png");
     
     m_grid.loadFromFile("res/gfx/grid.png");
     m_case.loadFromFile("res/gfx/case.png");
@@ -64,6 +68,7 @@ void Graphics::load()
     
     m_mainColor = sf::Color(52, 39, 20);
     m_secondColor = sf::Color(120, 109, 95);
+    m_contentColor = sf::Color::White;
 }
 
 sf::Texture const& Graphics::getButton() const
@@ -94,6 +99,16 @@ sf::Texture const& Graphics::getReturn() const
 sf::Texture const& Graphics::getReturnFired() const
 {
     return m_returnFired;
+}
+
+sf::Texture const& Graphics::getRestart() const
+{
+    return m_restart;
+}
+
+sf::Texture const& Graphics::getRestartFired() const
+{
+    return m_restartFired;
 }
 
 sf::Texture const& Graphics::getGrid() const
@@ -169,4 +184,9 @@ sf::Color Graphics::getMainColor() const
 sf::Color Graphics::getSecondColor() const
 {
     return m_secondColor;
+}
+
+sf::Color Graphics::getContentColor() const
+{
+	return m_contentColor;
 }

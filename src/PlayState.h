@@ -64,8 +64,8 @@ private:
     sf::RectangleShape m_lineWin;
     float m_lineStep;
     sf::Sprite m_gameoverPanel;
-    sf::ui::Label m_gameoverLabel, m_gameoverWinner;
-    sf::ui::Button m_gameoverButton;
+    sf::ui::Label m_gameoverWinner;
+    sf::ui::Button m_gameoverRestart, m_gameoverLeave;
     bool m_gameover;
     sf::Uint32 m_gameoverUpdatesLeft;
     bool m_flipDirection; // True -> Flip Left, false -> Flip Right
