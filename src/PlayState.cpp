@@ -20,7 +20,7 @@
 
 PlayState::PlayState(Game &game, bool multi)
 : State(game), m_multiplayer(multi),
-  m_background(), m_title(), m_subTitle(),
+  m_background(),
   m_grid(*this), m_turn(NONE), m_gridSprite(),
   m_arrowTop1(this, &PlayState::flipLeft1),
   m_arrowBottom1(this, &PlayState::flipRight1),
@@ -34,8 +34,6 @@ PlayState::PlayState(Game &game, bool multi)
   m_flipDirection(false), m_flipUpdatesLeft(0),
   m_ready(true)
 {
-    m_title.setText("Flip Four");
-    m_subTitle.setText("1 vs 1");
     m_background.setFillColor(sf::Color::Red);
     
     setTurn(PLAYER_1);
@@ -43,20 +41,10 @@ PlayState::PlayState(Game &game, bool multi)
     
 void PlayState::init()
 {
-    m_background.setSize(sf::Vector2f(m_game.getSize()));
-
-    Fonts const &f = m_game.fonts();
-    m_title.setFont(f.getBold());
-    m_title.setFontColor(sf::Color::White);
-    m_title.setFontSize(45);
-    m_title.setPosition(m_game.getSize().x/2 - m_title.getSize().x/2, 0);
-    
-    m_subTitle.setFont(f.getContent());
-    m_subTitle.setFontColor(sf::Color::White);
-    m_subTitle.setFontSize(35);
-    m_subTitle.setPosition(m_game.getSize().x/2 - m_subTitle.getSize().x/2, m_game.getSize().y - m_subTitle.getSize().y - 20);
+    m_background.setSize(sf::Vector2f(m_game.getSize()));    
     
     Graphics const &g = m_game.gfx();
+    Fonts const &f = m_game.fonts();
         
     m_grid.init();
     sf::Texture const &gridTex = m_grid.getGridTexture();
@@ -190,8 +178,6 @@ void PlayState::deInit()
 void PlayState::render(sf::RenderTarget &target)
 {
     target.draw(m_background);
-    target.draw(m_title);
-    target.draw(m_subTitle);
     target.draw(m_arrowTop1);
     target.draw(m_arrowBottom1);
     target.draw(m_arrowTop2);

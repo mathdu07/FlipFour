@@ -56,7 +56,6 @@ private:
 private:
     bool m_multiplayer; // True -> Multiplayer, False -> Singleplayer VS AI
     sf::RectangleShape m_background;
-    sf::ui::Label m_title, m_subTitle;
     Grid m_grid;
     Case m_turn;
     sf::Sprite m_gridSprite;

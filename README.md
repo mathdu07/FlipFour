@@ -3,7 +3,7 @@ Flip Four
 
 Rules
 -----
-The goal of Flip Four is to align, horizontaly, verticaly, or diagonally, four similar symbols, in a grid of 5 * 5 squares.
+The goal of Flip Four is to align, horizontaly, verticaly, or diagonally, four similar symbols, in a grid of 7 * 7 squares.
 The first player who is matching these conditions win the game.
 If nobody has aligned 4 symbols when the grid is full, the game is declared tie.
 The players can't have the same symbols.

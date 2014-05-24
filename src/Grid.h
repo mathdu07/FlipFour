@@ -18,7 +18,7 @@
 #ifndef GRID_H
 #define GRID_H
 
-#define GRID_SIZE 5
+#define GRID_SIZE 7
 
 enum Case
 {
