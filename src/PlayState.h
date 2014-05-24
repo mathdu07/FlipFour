@@ -60,6 +60,8 @@ private:
     Case m_turn;
     sf::Sprite m_gridSprite;
     sf::ui::Button m_arrowTop1, m_arrowBottom1, m_arrowTop2, m_arrowBottom2;
+    sf::Sprite m_backgroundTurn1, m_backgroundTurn2;
+    sf::Sprite m_caseTurn1, m_caseTurn2;
     sf::RectangleShape m_lineWin;
     float m_lineStep;
     sf::Sprite m_gameoverPanel;

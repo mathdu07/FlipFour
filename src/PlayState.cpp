@@ -26,6 +26,8 @@ PlayState::PlayState(Game &game, bool multi)
   m_arrowBottom1(this, &PlayState::flipRight1),
   m_arrowTop2(this, &PlayState::flipRight2),
   m_arrowBottom2(this, &PlayState::flipLeft2),
+  m_backgroundTurn1(), m_backgroundTurn2(),
+  m_caseTurn1(), m_caseTurn2(),
   m_lineWin(), m_lineStep(0), m_gameoverPanel(),
   m_gameoverWinner(), 
   m_gameoverRestart(&game, &Game::playMultiplayer),
@@ -51,6 +53,22 @@ void PlayState::init()
     m_gridSprite.setTexture(gridTex);
     m_gridSprite.setOrigin(sf::Vector2f(gridTex.getSize()) / 2.f);
     m_gridSprite.setPosition(m_game.getSize().x/2, m_game.getSize().y/2);
+    
+    m_backgroundTurn1.setTexture(g.getCase());
+    m_backgroundTurn1.setOrigin((sf::Vector2f) (g.getCase().getSize()) / 2.f);
+    m_backgroundTurn1.setPosition((m_gridSprite.getPosition().x - m_gridSprite.getOrigin().x)/2, m_game.getSize().y/2);
+    
+    m_backgroundTurn2.setTexture(g.getCase());
+    m_backgroundTurn2.setOrigin((sf::Vector2f) (g.getCase().getSize()) / 2.f);
+    m_backgroundTurn2.setPosition(m_gridSprite.getPosition().x + m_gridSprite.getOrigin().x + (m_game.getSize().x - m_gridSprite.getPosition().x - m_gridSprite.getOrigin().x)/2, m_game.getSize().y/2);
+    
+    m_caseTurn1.setTexture(g.getPlayer1());
+    m_caseTurn1.setOrigin(m_backgroundTurn1.getOrigin());
+    m_caseTurn1.setPosition(m_backgroundTurn1.getPosition());
+    
+    m_caseTurn2.setTexture(g.getPlayer2());
+    m_caseTurn2.setOrigin(m_backgroundTurn2.getOrigin());
+    m_caseTurn2.setPosition(m_backgroundTurn2.getPosition());
     
     m_arrowTop1.setTexture(g.getArrowTopLeft());
     m_arrowTop1.setTextureFocused(g.getArrowTopLeft());
@@ -182,6 +200,18 @@ void PlayState::render(sf::RenderTarget &target)
     target.draw(m_arrowBottom1);
     target.draw(m_arrowTop2);
     target.draw(m_arrowBottom2);
+    
+    target.draw(m_backgroundTurn1);
+    target.draw(m_backgroundTurn2);
+    
+    if (m_turn == PLAYER_1)
+    {
+    	target.draw(m_caseTurn1);
+    }
+    else if (m_turn == PLAYER_2)
+    {
+    	target.draw(m_caseTurn2);
+    }
     
     m_grid.render();
     target.draw(m_gridSprite);
