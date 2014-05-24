@@ -80,7 +80,7 @@ void AboutState::init()
     m_back.setTexture(g.getReturn());
     m_back.setTextureFocused(g.getReturn());
     m_back.setTextureFired(g.getReturnFired());
-    m_back.setPosition(m_game.getSize().x - m_back.getSize().x - 20, m_game.getSize().y - m_back.getSize().y - 20);
+    m_back.setPosition(m_game.getSize().x - m_back.getSize().x - 20, m_game.getSize().y - m_back.getSize().y - 10);
 }
 
 void AboutState::handleEvent(sf::Event const &event)

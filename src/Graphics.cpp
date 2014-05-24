@@ -22,6 +22,7 @@ Graphics::Graphics()
   m_bigButton(), m_bigButtonFired(),
   m_return(), m_returnFired(),
   m_restart(), m_restartFired(),
+  m_settings(), m_settingsFired(),
   m_grid(), m_case(),
   m_player1(), m_player2(),
   m_arrowBottomLeft(), m_arrowBottomRight(),
@@ -48,9 +49,11 @@ void Graphics::load()
     m_restart.loadFromFile("res/gfx/restart.png");
     m_restartFired.loadFromFile("res/gfx/restart_fired.png");
     
+    m_settings.loadFromFile("res/gfx/settings.png");
+    m_settingsFired.loadFromFile("res/gfx/settings_fired.png");
+    
     m_grid.loadFromFile("res/gfx/grid.png");
     m_case.loadFromFile("res/gfx/case.png");
-    m_case.setRepeated(true);
     
     m_player1.loadFromFile("res/gfx/player_1.png");
     m_player2.loadFromFile("res/gfx/player_2.png");
@@ -110,6 +113,17 @@ sf::Texture const& Graphics::getRestartFired() const
 {
     return m_restartFired;
 }
+
+sf::Texture const& Graphics::getSettings() const
+{
+    return m_settings;
+}
+
+sf::Texture const& Graphics::getSettingsFired() const
+{
+    return m_settingsFired;
+}
+
 
 sf::Texture const& Graphics::getGrid() const
 {

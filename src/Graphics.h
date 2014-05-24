@@ -39,6 +39,9 @@ public:
     sf::Texture const& getRestart() const;
     sf::Texture const& getRestartFired() const;
     
+    sf::Texture const& getSettings() const;
+    sf::Texture const& getSettingsFired() const;
+    
     sf::Texture const& getGrid() const;
     sf::Texture const& getCase() const;
     
@@ -68,6 +71,7 @@ private:
     sf::Texture m_bigButton, m_bigButtonFired;
     sf::Texture m_return, m_returnFired;
     sf::Texture m_restart, m_restartFired;
+    sf::Texture m_settings, m_settingsFired;
     sf::Texture m_grid, m_case;
     sf::Texture m_player1, m_player2;
     sf::Texture m_arrowBottomLeft, m_arrowBottomRight;

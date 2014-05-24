@@ -36,25 +36,20 @@ void MainMenuState::init()
 {
     Graphics const &g = m_game.gfx();
     m_versusButton.setTexture(g.getBigButton());
-    m_aboutButton.setTexture(g.getButton());
-    m_exitButton.setTexture(g.getButton());
+    m_aboutButton.setTexture(g.getSettings());
+    m_exitButton.setTexture(g.getReturn());
     
     m_versusButton.setTextureFocused(g.getBigButton());
-    m_aboutButton.setTextureFocused(g.getButton());
-    m_exitButton.setTextureFocused(g.getButton());
+    m_aboutButton.setTextureFocused(g.getSettings());
+    m_exitButton.setTextureFocused(g.getReturn());
 
     m_versusButton.setTextureFired(g.getBigButtonFired());
-    m_aboutButton.setTextureFired(g.getButtonFired());
-    m_exitButton.setTextureFired(g.getButtonFired());
+    m_aboutButton.setTextureFired(g.getSettingsFired());
+    m_exitButton.setTextureFired(g.getReturnFired());
 
     Fonts const &f = m_game.fonts();
     m_versusButton.setFont(f.getBold());
-    m_aboutButton.setFont(f.getContent());
-    m_exitButton.setFont(f.getContent());
-
     m_versusButton.setFontColor(sf::Color::Black);
-    m_aboutButton.setFontColor(sf::Color::Black);
-    m_exitButton.setFontColor(sf::Color::Black);
 
     m_title.setFont(f.getBold());
     m_title.setFontColor(sf::Color::White);
